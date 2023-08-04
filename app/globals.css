@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.shadow {
+  box-shadow: 6px 8px black !important;
+}
+
+.shadow:hover {
+  transform: translate(3px, 3px);
+  box-shadow: 3px 5px black !important;
+}
+
+.shadow-light {
+  box-shadow: 6px 8px whitesmoke !important;
+}
+
+.shadow:hover {
+  transform: translate(3px, 3px);
+  box-shadow: 3px 5px whitesmoke !important;
+}
