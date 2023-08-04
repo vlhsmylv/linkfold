@@ -5,6 +5,7 @@ import { compare } from "bcryptjs";
 import { User } from "@prisma/client";
 
 export const authOptions: NextAuthOptions = {
+  secret: process.env.NEXTAUTH_SECRET,
   session: {
     strategy: "jwt",
   },
@@ -46,7 +47,7 @@ export const authOptions: NextAuthOptions = {
           ...session.user,
           username: token.username,
           email: token.email,
-          uid: token.uid
+          uid: token.uid,
         },
       };
     },
@@ -57,7 +58,7 @@ export const authOptions: NextAuthOptions = {
           ...token,
           username: u.username,
           email: u.email,
-          uid: u.id
+          uid: u.id,
         };
       }
       return token;
@@ -69,8 +70,8 @@ export const authOptions: NextAuthOptions = {
 };
 
 export const checkSession = (session: { user: User }) => {
-  if(!session) return false; 
-  
+  if (!session) return false;
+
   const { user } = session;
 
   return typeof user === "object"
