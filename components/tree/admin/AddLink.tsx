@@ -74,7 +74,7 @@ const AddLink = ({ user, theme }: { user: User; theme: string }) => {
       <button
         title="Add link"
         onClick={toggleShow}
-        className={`ease-in-out duration-300 hover:scale-110 flex gap-2 items-center rounded-full p-2 text-xl ${styles[theme]}`}
+        className={`ease-in-out duration-300 hover:scale-110 flex gap-2 items-center rounded-full px-3 py-2 text-xl ${styles[theme]}`}
       >
         <IoAdd /> <div className="text-base">Add Link</div>
       </button>
@@ -82,8 +82,9 @@ const AddLink = ({ user, theme }: { user: User; theme: string }) => {
       <Dialog
         header="Add Link"
         visible={show}
-        style={{ width: "40vw" }}
+        style={{ maxWidth: "600px" }}
         onHide={toggleShow}
+        className="mx-5 lg:w-full"
       >
         <form onSubmit={handleAddLink} className={styles.form}>
           <div className={styles.imageContainer}>
