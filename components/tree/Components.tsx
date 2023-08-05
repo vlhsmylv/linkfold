@@ -15,6 +15,7 @@ export const UserImage = ({
   const styles = {
     DEFAULT: "border border-gray-500",
     DARK: "border border-white",
+    NEOBRUTALIST: "border-2 border-black",
   };
 
   return (
@@ -79,6 +80,7 @@ export const UserLink = ({
   title,
   icon,
   href,
+  color,
   target,
   admin,
   theme,
@@ -88,19 +90,24 @@ export const UserLink = ({
   icon?: string;
   href: string;
   target?: string;
+  color?: string;
   admin: boolean;
   theme: string;
 }) => {
   const styles = {
-    DEFAULT: "border border-black",
-    DARK: "border border-gray-100",
+    DEFAULT: "hover:scale-110 border border-black",
+    DARK: "hover:scale-110 border border-gray-100",
+    NEOBRUTALIST: "border-2 shadow shadow-black border-black"
   };
 
   return (
     <div className="px-5 flex flex-wrap lg:flex-nowrap justify-center gap-5 max-w-[700px] w-full items-center w-full">
       <Link
+        style={theme === "NEOBRUTALIST" ? { 
+          background: color
+        } : {}}
         href={href}
-        className={`hover:scale-110 flex max-w-[664px] w-full px-3 py-2 rounded-md ease-in-out duration-300 ${styles[theme]}`}
+        className={`flex max-w-[664px] w-full px-3 py-2 rounded-md ease-in-out duration-300 ${styles[theme]}`}
         target={target ? target : "_blank"}
       >
         <img
@@ -123,9 +130,12 @@ export const UserLink = ({
             icon={icon}
             href={href}
             target={target}
-            theme={theme}
+            theme={theme === "NEOBRUTALIST" ? "DEFAULT" : theme}
           />
-          <RemoveLink linkId={id} theme={theme} />
+          <RemoveLink
+            linkId={id}
+            theme={theme === "NEOBRUTALIST" ? "DEFAULT" : theme}
+          />
         </div>
       ) : (
         <></>

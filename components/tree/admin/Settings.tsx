@@ -84,7 +84,7 @@ const Settings = ({ user, theme }: { user: User; theme: string }) => {
             >
               <option value="DEFAULT">Default</option>
               <option value="DARK">Dark</option>
-              <option disabled value="NEOBRUTALIST">Neobrutalist</option>
+              <option value="NEOBRUTALIST">Neobrutalist</option>
             </select>
           </div>
           <div className={styles.group}>

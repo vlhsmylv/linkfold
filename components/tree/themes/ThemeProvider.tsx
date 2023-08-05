@@ -2,6 +2,7 @@ import { Preferences, User } from "@prisma/client";
 import Default from "./Default";
 import { ReactNode } from "react";
 import Dark from "./Dark";
+import Neobrutalist from "./Neobrutalist";
 
 const ThemeProvider = ({ user, admin }: { user: User; admin?: boolean }) => {
   // TODO: TS ERROR
@@ -9,12 +10,14 @@ const ThemeProvider = ({ user, admin }: { user: User; admin?: boolean }) => {
 
   const styles = {
     DEFAULT: "bg-gray-100 ff-default",
-    DARK: "bg-[#010101] ff-default text-gray-100"
+    DARK: "bg-[#010101] ff-default text-gray-100",
+    NEOBRUTALIST: "bg-[#FFDB58] ff-rude",
   };
 
-  const themes: { DEFAULT: ReactNode, DARK: ReactNode } = {
+  const themes: { DEFAULT: ReactNode, DARK: ReactNode, NEOBRUTALIST: ReactNode } = {
     DEFAULT: <Default user={user} admin={admin} />,
-    DARK: <Dark user={user} admin={admin} />
+    DARK: <Dark user={user} admin={admin} />,
+    NEOBRUTALIST: <Neobrutalist user={user} admin={admin} />
   };
 
   // TODO: TS ERROR
