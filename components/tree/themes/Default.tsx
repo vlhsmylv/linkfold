@@ -76,7 +76,7 @@ const Default = ({ user, admin }: { user: User; admin?: boolean }) => {
         )}
         {user.socials.twitter ? (
           <SocialLink
-            title="Instagram"
+            title="Twitter"
             icon={<AiOutlineTwitter />}
             url={"https://twitter.com"}
             href={user.socials?.twitter}

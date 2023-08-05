@@ -9,7 +9,7 @@ const ThemeProvider = ({ user, admin }: { user: User; admin?: boolean }) => {
   const { theme }: { theme: string } = user.preferences;
 
   const styles = {
-    DEFAULT: "bg-gray-100 ff-default",
+    DEFAULT: "ff-default",
     DARK: "bg-[#010101] ff-default text-gray-100",
     NEOBRUTALIST: "bg-[#FFDB58] ff-rude",
   };

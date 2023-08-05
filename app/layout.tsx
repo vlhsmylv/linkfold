@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 const RootLayout = async ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en">
-      <body className={`${inter.className}`}>
+      <body className={`bg-gray-100 ${inter.className}`}>
         {children}
         <ToastContainer />
       </body>
