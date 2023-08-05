@@ -18,9 +18,44 @@ import Logo from "@/components/base/Logo";
 import Link from "next/link";
 import Settings from "../admin/Settings";
 import SignOut from "@/components/auth/SignOut";
-import { randomColorPicker } from "@/functions";
 
 const Neobrutalist = ({ user, admin }: { user: User; admin?: boolean }) => {
+  let usedColors: string[] = [];
+
+  const colors = [
+    "#FF6B6B", 
+    "#69D2E7", 
+    "#C4A1FF", 
+    "#90EE90",
+    "#A7DBD8",
+    "#BAFCA2",
+    "#FFA07A",
+    "#FFC0CB",
+    "#C4A1FF",
+    "#F8D6B3",
+    "#DAf5F0",
+  ];
+
+  const randomColorPicker = () => {
+    const randomIndex = Math.floor(Math.random() * colors.length);
+    const randomColor = colors[randomIndex];
+    usedColors.push(randomColor);
+    const usedTwoTimes =
+      usedColors.filter((usedColor) => usedColor === randomColor).length > 1;
+    if (!usedTwoTimes) {
+      return randomColor;
+    } else {
+      const useableColors = colors.filter(
+        (color) => !usedColors.includes(color)
+      );
+      const randomIndexForUseableColor = Math.floor(
+        Math.random() * useableColors.length
+      );
+      const randomUseableColor = useableColors[randomIndexForUseableColor];
+      return randomUseableColor;
+    }
+  };
+
   // TODO: TS ERROR
   return (
     <div className="max-w-[600px] m-auto py-12 flex flex-col items-center justify-center gap-7">
@@ -77,7 +112,7 @@ const Neobrutalist = ({ user, admin }: { user: User; admin?: boolean }) => {
         )}
         {user.socials.twitter ? (
           <SocialLink
-            title="Instagram"
+            title="Twitter"
             icon={<AiOutlineTwitter />}
             url={"https://twitter.com"}
             href={user.socials?.twitter}

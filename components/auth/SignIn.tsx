@@ -42,6 +42,7 @@ const SignIn = () => {
   };
 
   const styles = {
+    form: "m-auto mx-5 max-w-[400px] flex flex-col justify-center gap-7 my-10 border border-black px-5 py-7",
     form: "mx-5 max-w-[400px] w-full flex flex-col justify-center gap-7 my-10 border border-black px-5 py-7",
     group: "flex flex-col gap-3",
     label: "text-lg",
