@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url(./fonts/clash-display.css);
+
 .shadow {
   box-shadow: 6px 8px black !important;
 }
@@ -9,4 +11,8 @@
 .shadow:hover {
   transform: translate(3px, 3px);
   box-shadow: 3px 5px black !important;
+}
+
+.ff-rude {
+  font-family: "Clash Display", sans-serif;
 }
