@@ -80,7 +80,8 @@ const EditIndicators = ({ user, theme }: { user: User; theme: string }) => {
       <Dialog
         header="Edit Personal Information"
         visible={show}
-        style={{ width: "40vw" }}
+        style={{ maxWidth: "600px" }}
+        className="mx-5 lg:w-full"
         onHide={toggleShow}
       >
         <form onSubmit={handleEditIndicators} className={styles.form}>

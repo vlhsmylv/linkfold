@@ -75,7 +75,8 @@ const EditSocials = ({ user, theme }: { user: User; theme: string }) => {
       <Dialog
         header="Social Links"
         visible={show}
-        style={{ width: "40vw" }}
+        style={{ maxWidth: "600px" }}
+        className="mx-5 lg:w-full"
         onHide={toggleShow}
       >
         <form onSubmit={handleEditSocials} className={styles.form}>
