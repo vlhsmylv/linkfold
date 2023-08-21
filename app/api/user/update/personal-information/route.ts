@@ -24,6 +24,13 @@ export const POST = async (req: Request) => {
     });
 
   try {
+    if (bio.length > 150) {
+      return NextResponse.json({
+        status: 500,
+        message: "Bio cannot be more than 150 chars.",
+      });
+    }
+
     // * Upload to imgbb
     const { data: imgbbRes }: any = await axios.post(
       "https://api.imgbb.com/1/upload",

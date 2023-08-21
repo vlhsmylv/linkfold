@@ -7,9 +7,11 @@ import { User } from "@prisma/client";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { toastConfig } from "@/toast";
+import Promising from "@/components/base/Promising";
 
 const EditIndicators = ({ user, theme }: { user: User; theme: string }) => {
   const [show, setShow] = useState(false);
+  const [promising, setPromising] = useState(false);
 
   const [image, setImage] = useState<any>(user.image);
 
@@ -32,6 +34,9 @@ const EditIndicators = ({ user, theme }: { user: User; theme: string }) => {
 
     const { name, bio } = e.target;
 
+    setShow(false);
+    setPromising(true);
+
     const { data: res }: any = await axios.post(
       "/api/user/update/personal-information",
       {
@@ -42,6 +47,8 @@ const EditIndicators = ({ user, theme }: { user: User; theme: string }) => {
     );
 
     if (res.status !== 200) return toast.error(res.message, toastConfig);
+
+    setPromising(false);
 
     toast.success(res.message, toastConfig);
 
@@ -69,6 +76,8 @@ const EditIndicators = ({ user, theme }: { user: User; theme: string }) => {
 
   return (
     <>
+      {promising ? <Promising /> : <></>}
+
       <button
         title="Edit personal information"
         onClick={toggleShow}

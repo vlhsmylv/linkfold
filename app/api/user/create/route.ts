@@ -21,6 +21,36 @@ export const POST = async (request: Request) => {
   try {
     const hashedPassword = await hash(password, 12);
 
+    if (name.length >= 30) {
+      return NextResponse.json({
+        success: false,
+        message: "Name cannot be more than 30 characters",
+      });
+    }
+
+    if (username.length >= 20 || username.length <= 5) {
+      return NextResponse.json({
+        success: false,
+        message:
+          "Username cannot be less than 5 characters or more than 20 characters",
+      });
+    }
+
+    if (!!!/^[a-z0-9_\.]+$/.exec(username)) {
+      return NextResponse.json({
+        success: false,
+        message:
+          "Username can only have lowercase letters, numbers from 0 to 9, dots (.), and underscores (_)",
+      });
+    }
+
+    if (password.length <= 8) {
+      return NextResponse.json({
+        success: false,
+        message: "Password should be more than 8 characters",
+      });
+    }
+
     const createUser = await prisma.user.create({
       data: {
         name: name,
