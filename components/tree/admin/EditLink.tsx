@@ -1,5 +1,6 @@
 "use client";
 
+import Promising from "@/components/base/Promising";
 import { toastConfig } from "@/toast";
 import { Link } from "@prisma/client";
 import axios from "axios";
@@ -25,6 +26,7 @@ const EditLink = ({
 }) => {
   const [show, setShow] = useState(false);
   const [icon, setIcon] = useState<any>(_icon);
+  const [promising, setPromising] = useState(false);
 
   const toggleShow = () => {
     setShow(show ? false : true);
@@ -45,6 +47,9 @@ const EditLink = ({
 
     const { title, href, target } = e.target;
 
+    setShow(false);
+    setPromising(true);
+
     const { data: res }: any = await axios.post("/api/user/link/edit", {
       id: id,
       icon: icon,
@@ -54,6 +59,8 @@ const EditLink = ({
     });
 
     if (res.status !== 200) return toast.error(res.message, toastConfig);
+
+    setPromising(false);
 
     toast.success(res.message, toastConfig);
 
@@ -83,6 +90,8 @@ const EditLink = ({
 
   return (
     <>
+      {promising ? <Promising /> : <></>}
+
       <button
         title="Edit link"
         onClick={toggleShow}

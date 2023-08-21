@@ -1,5 +1,6 @@
 "use client";
 
+import Promising from "@/components/base/Promising";
 import { toastConfig } from "@/toast";
 import { User } from "@prisma/client";
 import axios from "axios";
@@ -15,6 +16,7 @@ import { toast } from "react-toastify";
 
 const EditSocials = ({ user, theme }: { user: User; theme: string }) => {
   const [show, setShow] = useState(false);
+  const [promising, setPromising] = useState(false);
 
   const toggleShow = () => {
     setShow(show ? false : true);
@@ -24,6 +26,9 @@ const EditSocials = ({ user, theme }: { user: User; theme: string }) => {
     e.preventDefault();
 
     const { instagram, twitter, linkedin } = e.target;
+
+    setShow(false);
+    setPromising(true);
 
     const { data: res }: any = await axios.post(
       "/api/user/update/social-links",
@@ -35,6 +40,8 @@ const EditSocials = ({ user, theme }: { user: User; theme: string }) => {
     );
 
     if (res.status !== 200) return toast.error(res.message, toastConfig);
+
+    setPromising(false);
 
     toast.success(res.message, toastConfig);
 
@@ -64,6 +71,8 @@ const EditSocials = ({ user, theme }: { user: User; theme: string }) => {
 
   return (
     <>
+      {promising ? <Promising /> : <></>}
+
       <button
         title="Edit social links"
         onClick={toggleShow}

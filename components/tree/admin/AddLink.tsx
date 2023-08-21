@@ -1,5 +1,6 @@
 "use client";
 
+import Promising from "@/components/base/Promising";
 import { toastConfig } from "@/toast";
 import { User } from "@prisma/client";
 import axios from "axios";
@@ -10,6 +11,7 @@ import { toast } from "react-toastify";
 
 const AddLink = ({ user, theme }: { user: User; theme: string }) => {
   const [show, setShow] = useState(false);
+  const [promising, setPromising] = useState(false);
 
   const [icon, setIcon] = useState<any>(
     "https://t4.ftcdn.net/jpg/03/01/74/15/360_F_301741517_3bvFxpxY3I74BrSFJT86Cqzz6p8cEBJ7.jpg"
@@ -34,6 +36,9 @@ const AddLink = ({ user, theme }: { user: User; theme: string }) => {
 
     const { title, href, target } = e.target;
 
+    setShow(false);
+    setPromising(true);
+
     const { data: res }: any = await axios.post("/api/user/link/add", {
       icon: icon,
       title: title.value,
@@ -41,7 +46,10 @@ const AddLink = ({ user, theme }: { user: User; theme: string }) => {
       target: target.value,
     });
 
-    if (res.status !== 200) return toast.error(res.message || "Error occured", toastConfig);
+    if (res.status !== 200)
+      return toast.error(res.message || "Error occured", toastConfig);
+
+    setPromising(false);
 
     toast.success(res.message, toastConfig);
 
@@ -71,6 +79,8 @@ const AddLink = ({ user, theme }: { user: User; theme: string }) => {
 
   return (
     <>
+      {promising ? <Promising /> : <></>}
+
       <button
         title="Add link"
         onClick={toggleShow}
